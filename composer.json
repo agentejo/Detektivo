@@ -1,0 +1,7 @@
+{
+    "require": {
+        "elasticsearch/elasticsearch": "~5.0",
+        "algolia/algoliasearch-client-php": "~1.21",
+        "teamtnt/tntsearch": "^1.1"
+    }
+}

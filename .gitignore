@@ -1,0 +1,11 @@
+*~
+*.diff
+*.patch
+.DS_Store
+.project
+.settings
+.idea
+/node_modules
+composer.lock
+!.gitignore
+!.gitkeep
