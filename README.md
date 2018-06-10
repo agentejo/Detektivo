@@ -1,3 +1,5 @@
+Add files to addons/Detektivo.
+
 # Configuration
 
 Create config file detektivo.yaml `config/detektivo.yaml`:
@@ -25,6 +27,15 @@ Collections + fields to index
 ```
 collections:
     posts: [title, excerpt, content]
+```
+
+
+# Api
+
+Detektivo entry point:
+
+```
+/api/detektivo/collection/{name}?token=*apitoken*&q={searchterm}
 ```
 
 

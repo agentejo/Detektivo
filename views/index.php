@@ -30,7 +30,7 @@
                 <div class="uk-text-bold uk-flex uk-flex-middle">
                     <span class="uk-flex-item-1">{collection}</span>
                     <span class="uk-badge">{ Array.isArray(fields) ? fields.length : 0}</span>
-                    <a class="uk-button uk-button-link" onclick="{ parent.reIndex }"><i class="uk-icon-refresh"></i></a>
+                    <a class="uk-button uk-button-link" onclick="{ parent.reIndex }" data-uk-tooltip title="Re-Index {collection}"><i class="uk-icon-refresh"></i></a>
                 </div>
 
 
@@ -49,14 +49,24 @@
 
         reIndex(e) {
 
-            var collection = e.item.collection;
+            var collection = e.item.collection, skip = 0, indexer = function() {
 
 
-            App.ui.block('<div class="uk-text-center"><i class="uk-icon-spin uk-icon-spinner uk-text-xlarge uk-text-primary"></i><p class="uk-text-large uk-text-bold">Re-Indexing '+collection+'</p><div class="uk-margin uk-text-muted">This may take a while</div></div>');
+                App.request('/detektivo/reindex', {collection: collection, skip: skip}).then(function(res) {
 
-            App.request('/detektivo/reindex', {collection: collection}).then(function() {
-                App.ui.unblock();
-            });
+                    skip += res.imported;
+
+                    if (res.finished) {
+                        App.ui.unblock();
+                    } else {
+                        App.$('#import-counter').html(skip);
+                        indexer();
+                    }
+                });
+            };
+
+            App.ui.block('<div class="uk-text-center"><i class="uk-icon-spin uk-icon-spinner uk-text-xlarge uk-text-primary"></i><p class="uk-text-large uk-text-bold">Re-Indexing '+collection+'</p><div class="uk-margin uk-text-muted">This may take a while</div><div class="uk-margin uk-h3" id="import-counter"></div></div>');
+            indexer();
         }
 
     </script>

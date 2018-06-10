@@ -25,6 +25,18 @@ class Algolia extends Storage {
         return $index->partialUpdateObject($data, true);
     }
 
+    public function batchSave($index, $items) {
+
+        foreach ($items as &$item) {
+            $item['objectID'] = $item['_id'];
+        }
+
+        $index = $this->client->initIndex($index);
+
+        return $index->addObjects($items);
+
+    }
+
     public function delete($index, $ids) {
         return $this->client->initIndex($index)->deleteObjects($ids);
     }

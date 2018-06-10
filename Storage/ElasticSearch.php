@@ -61,6 +61,15 @@ class ElasticSearch extends Storage {
         return $this->client->index($params);
     }
 
+    public function batchSave($type, $items) {
+
+        foreach ($items as &$item) {
+            $this->save($type, $item);
+        }
+
+        return true;
+    }
+
     public function delete($type, $ids) {
 
         foreach ($ids as $id) {
@@ -75,13 +84,7 @@ class ElasticSearch extends Storage {
     }
 
     public function empty($type) {
-
-        $params = [
-            'index' => $this->config['index'],
-            'type'  => $type
-        ];
-
-        return $this->client->delete($params);
+        return false;
     }
 
     public function deleteIndex($type) {

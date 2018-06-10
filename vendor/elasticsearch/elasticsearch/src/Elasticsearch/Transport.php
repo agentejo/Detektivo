@@ -113,10 +113,13 @@ class Transport
                 // Note, this could be a 4xx or 5xx error
             },
             //onFailure
-            function ($response) {
-                //some kind of real faiure here, like a timeout
-                $this->connectionPool->scheduleCheck();
-                // log stuff
+            function (\Exception $response) {
+                // Ignore 400 level errors, as that means the server responded just fine
+                $code = $response->getCode();
+                if (!(isset($code) && $code >=400 && $code < 500)) {
+                    // Otherwise schedule a check
+                    $this->connectionPool->scheduleCheck();
+                }
             });
 
         return $future;

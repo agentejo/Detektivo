@@ -22,18 +22,28 @@ class Admin extends \Cockpit\AuthController {
             return false;
         }
 
-        //$this->module('detektivo')->storage()->empty($collection);
+        $options = [
+            'limit' => 100,
+            'skip' => $this->param('skip', 0),
+            'fields' => ['_id' => 1]
+        ];
 
-        $items = $this->module('collections')->find($collection);
+        $fields = $this->module('detektivo')->fields($collection);
 
-        foreach ($items as $item) {
-            try {
-                $storage->save($collection, $item);
-            } catch (\Exception $e) {}
+        foreach ($fields as $field) {
+            $options['fields'][$field] = 1;
         }
 
+        $this->module('detektivo')->storage()->empty($collection);
 
-        return 1;
+        $items  = $this->module('collections')->find($collection, $options);
 
+        if (!count($items) || count($items) < $options['limit']) {
+            return ['finished' => true, 'imported' => count($items)];
+        }
+
+        $storage->batchSave($collection, $items);
+
+        return ['finished' => false, 'imported' => count($items), 'items' => $items];
     }
 }

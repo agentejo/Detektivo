@@ -18,9 +18,9 @@ class TNTSearch extends Storage {
         }
 
         $this->client->loadConfig([
-            "storage"   => $idxfolder,
-            "driver"    => 'sqlite',
-            "database"  => ':memory:'
+            'storage'   => $idxfolder,
+            'driver'    => 'sqlite',
+            'database'  => ':memory:'
         ]);
     }
 
@@ -29,7 +29,10 @@ class TNTSearch extends Storage {
         try {
             $this->client->selectIndex("{$index}.index");
             $this->client->fuzziness = true;
-            return $this->client->search($query);
+
+            $res = $this->client->search($query);
+
+            return $res;
         } catch (\Exception $e) {
             return [];
         }
@@ -46,6 +49,15 @@ class TNTSearch extends Storage {
         return $idx->insert($data);
     }
 
+    public function batchSave($index, $items) {
+
+        foreach ($items as &$item) {
+            $this->save($index, $item);
+        }
+
+        return true;
+    }
+
     public function delete($index, $ids) {
 
         $idx = $this->getIndex($index);
@@ -60,8 +72,9 @@ class TNTSearch extends Storage {
     }
 
     public function deleteIndex($index) {
+
         if (!file_exists($this->client->config['storage']."/{$index}.index")) {
-            unlink($this->client->config['storage']."/{$index}.index");
+            @unlink($this->client->config['storage']."/{$index}.index");
         }
     }
 

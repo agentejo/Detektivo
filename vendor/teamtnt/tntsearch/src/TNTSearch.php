@@ -60,13 +60,15 @@ class TNTSearch
 
     /**
      * @param string $indexName
+     * @param boolean $disableOutput
      *
      * @return TNTIndexer
      */
-    public function createIndex($indexName)
+    public function createIndex($indexName, $disableOutput = false)
     {
         $indexer = new TNTIndexer;
         $indexer->loadConfig($this->config);
+        $indexer->disableOutput = $disableOutput;
 
         if ($this->dbh) {
             $indexer->setDatabaseHandle($this->dbh);
@@ -387,7 +389,7 @@ class TNTSearch
      */
     public function isFileSystemIndex()
     {
-        $this->getValueFromInfoTable('filesystem') == 'filesystem';
+        return $this->getValueFromInfoTable('driver') == 'filesystem';
     }
 
     public function getValueFromInfoTable($value)

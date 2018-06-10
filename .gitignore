@@ -7,5 +7,7 @@
 .idea
 /node_modules
 composer.lock
+tests
+docs
 !.gitignore
 !.gitkeep

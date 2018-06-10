@@ -23,6 +23,28 @@ $app->module('detektivo')->extend([
         return $config;
     },
 
+    'fields' => function($collection) {
+
+        static $collections;
+
+        if (!$collections) {
+            $collections = $this->config('collections', []);
+        }
+
+        if (isset($collections[$collection])) {
+
+            if ($collections[$collection] == '*') {
+                $fields = array_keys($entry);
+            } else {
+                $fields = $collections[$collection];
+            }
+
+            return $fields;
+        }
+
+        return null;
+    },
+
     'storage' => function() {
 
         static $storage;
@@ -52,23 +74,9 @@ $app->on('cockpit.bootstrap', function() {
 
     $this->on('collections.save.after', function($collection, $entry, $isUpdate) {
 
-        static $collections;
+        if ($fields = $this->module('detektivo')->fields($collection)) {
 
-        if (!$collections) {
-            $collections = $this->module('detektivo')->config('collections', []);
-        }
-
-        if (isset($collections[$collection])) {
-
-            $data = [];
-
-            if ($collections[$collection] == '*') {
-                $fields = array_keys($entry);
-            } else {
-                $fields = $collections[$collection];
-            }
-
-            $data['_id'] = $entry['_id'];
+            $data = ['_id' => $entry['_id']];
 
             foreach ($fields as $field) {
                 if (isset($entry[$field])) { $data[$field] = $entry[$field]; }
@@ -105,4 +113,12 @@ $app->on('cockpit.bootstrap', function() {
 if (COCKPIT_ADMIN && !COCKPIT_API_REQUEST) {
 
     include_once(__DIR__.'/admin.php');
+}
+
+// REST
+if (COCKPIT_API_REQUEST) {
+
+    $app->on('cockpit.rest.init', function($routes) {
+        $routes['detektivo'] = 'Detektivo\\Controller\\RestApi';
+    });
 }
