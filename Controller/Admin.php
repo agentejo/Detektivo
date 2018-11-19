@@ -39,6 +39,9 @@ class Admin extends \Cockpit\AuthController {
         $items  = $this->module('collections')->find($collection, $options);
 
         if (!count($items) || count($items) < $options['limit']) {
+            foreach ($items as $item) {
+                $storage->save($collection, $item);
+            }
             return ['finished' => true, 'imported' => count($items)];
         }
 
