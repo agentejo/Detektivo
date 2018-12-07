@@ -38,11 +38,13 @@ class Admin extends \Cockpit\AuthController {
 
         $items  = $this->module('collections')->find($collection, $options);
 
+        if (count($items)) {
+            $storage->batchSave($collection, $items);
+        }
+
         if (!count($items) || count($items) < $options['limit']) {
             return ['finished' => true, 'imported' => count($items)];
         }
-
-        $storage->batchSave($collection, $items);
 
         return ['finished' => false, 'imported' => count($items), 'items' => $items];
     }

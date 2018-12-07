@@ -2,31 +2,35 @@ Add files to addons/Detektivo.
 
 # Configuration
 
-Create config file detektivo.yaml `config/detektivo.yaml`:
+Configuration `config/config.yaml`:
 
-Algolia (https://www.algolia.com):
+### Algolia (https://www.algolia.com):
 ```
-engine: algolia
-app_id: YLXXXXXXXYE
-api_key: xxxxxx85b706f0daaexxxxxxxx
-```
-
-ElasticSearch (https://www.elastic.co):
-```
-engine: elasticsearch
-hosts: [http://localhost:32769]
-index: cockpit
+detektivo:
+    engine: algolia
+    app_id: YLXXXXXXXYE
+    api_key: xxxxxx85b706f0daaexxxxxxxx
 ```
 
-TNTSearch (https://github.com/teamtnt/tntsearch):
+### ElasticSearch (https://www.elastic.co):
 ```
-engine: tntsearch
+detektivo:
+    engine: elasticsearch
+    hosts: [http://localhost:32769]
+    index: cockpit
 ```
 
-Collections + fields to index
+### TNTSearch (https://github.com/teamtnt/tntsearch):
 ```
-collections:
-    posts: [title, excerpt, content]
+detektivo:
+    engine: tntsearch
+```
+
+### Collections + fields to index
+```
+detektivo:
+    collections:
+        posts: [title, excerpt, content]
 ```
 
 

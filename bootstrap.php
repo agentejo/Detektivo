@@ -10,10 +10,7 @@ $app->module('detektivo')->extend([
         static $config;
 
         if (!$config) {
-
-            if ($configfile = $this->app->path('#config:detektivo.yaml')) {
-                $config = $this->app->helper('yaml')->fromFile($configfile);
-            }
+            $config = $this->app->retrieve('config/detektivo');
         }
 
         if ($key) {
