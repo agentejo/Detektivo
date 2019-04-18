@@ -231,6 +231,32 @@ class Client
         $this->context->setExtraHeader($key, $value);
     }
 
+    public function waitTask($indexName, $taskID, $timeBeforeRetry = 100, $requestHeaders = array())
+    {
+        while (true) {
+            $res = $this->getTaskStatus($indexName, $taskID, $requestHeaders);
+            if ($res['status'] === 'published') {
+                return $res;
+            }
+            usleep($timeBeforeRetry * 1000);
+        }
+    }
+
+    public function getTaskStatus($indexName, $taskID, $requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            sprintf('/1/indexes/%s/task/%s', urlencode($indexName), urlencode($taskID)),
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
     /**
      * This method allows to query multiple indexes with one API call.
      *
@@ -248,7 +274,7 @@ class Client
     {
         $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
 
-        if ($queries == null) {
+        if ($queries === null) {
             throw new \Exception('No query provided');
         }
         $requests = array();
@@ -275,6 +301,32 @@ class Client
             $this->context->connectTimeout,
             $this->context->searchTimeout,
             $requestHeaders
+        );
+    }
+
+    /**
+     * This method allows to get multiple objects from indexes with one API call.
+     *
+     * @param array  $queries
+     * @param string $indexNameKey
+     * @param string $objectIdKey
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
+     */
+    public function multipleGetObjects($requests, $requestOptions = array())
+    {
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/objects',
+            array(),
+            array('requests' => $requests),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->searchTimeout
         );
     }
 
@@ -378,7 +430,7 @@ class Client
     }
 
     /**
-     * Copy an existing index and define what to copy along with records:
+     * Copy an existing index and define what to copy instead of records:
      *  - settings
      *  - synonyms
      *  - query rules
@@ -387,7 +439,7 @@ class Client
      *
      * @param string $srcIndexName the name of index to copy.
      * @param string $dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overwritten if it already exist).
-     * @param array $scope Resource to copy along with records: 'settings', 'rules', 'synonyms'
+     * @param array $scope Resource to copy instead of records: 'settings', 'rules', 'synonyms'
      * @param array $requestHeaders
      * @return mixed
      */
@@ -688,6 +740,11 @@ class Client
         }
 
         return new Index($this->context, $this, $indexName);
+    }
+
+    public function initAnalytics()
+    {
+        return new Analytics($this);
     }
 
     /**
@@ -1301,9 +1358,14 @@ class Client
             return;
         }
 
-        $answer = Json::decode($response, true);
         $context->releaseMHandle($curlHandle);
         curl_close($curlHandle);
+
+        if ($http_status == 204) {
+            return '';
+        }
+
+        $answer = Json::decode($response, true);
 
         if (intval($http_status / 100) == 4) {
             throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);

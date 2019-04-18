@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70
+class ComposerStaticInit988bd479db40d56a36de2dab68988bab
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
@@ -75,6 +75,7 @@ class ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70
     public static $classMap = array (
         'AlgoliaSearch\\AlgoliaConnectionException' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaConnectionException.php',
         'AlgoliaSearch\\AlgoliaException' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaException.php',
+        'AlgoliaSearch\\Analytics' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Analytics.php',
         'AlgoliaSearch\\Client' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Client.php',
         'AlgoliaSearch\\ClientContext' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/ClientContext.php',
         'AlgoliaSearch\\FailingHostsCache' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/FailingHostsCache.php',
@@ -335,6 +336,7 @@ class ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'React\\Promise\\CancellablePromiseInterface' => __DIR__ . '/..' . '/react/promise/src/CancellablePromiseInterface.php',
         'React\\Promise\\CancellationQueue' => __DIR__ . '/..' . '/react/promise/src/CancellationQueue.php',
         'React\\Promise\\Deferred' => __DIR__ . '/..' . '/react/promise/src/Deferred.php',
@@ -374,6 +376,7 @@ class ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70
         'TeamTNT\\TNTSearch\\Support\\Collection' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/Collection.php',
         'TeamTNT\\TNTSearch\\Support\\Expression' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/Expression.php',
         'TeamTNT\\TNTSearch\\Support\\Highlighter' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/Highlighter.php',
+        'TeamTNT\\TNTSearch\\Support\\ProductTokenizer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/ProductTokenizer.php',
         'TeamTNT\\TNTSearch\\Support\\Tokenizer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/Tokenizer.php',
         'TeamTNT\\TNTSearch\\Support\\TokenizerInterface' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Support/TokenizerInterface.php',
         'TeamTNT\\TNTSearch\\TNTFuzzyMatch' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/TNTFuzzyMatch.php',
@@ -384,10 +387,10 @@ class ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitd1101f528a6e3bd42c5284c3b4ad9a70::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit988bd479db40d56a36de2dab68988bab::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit988bd479db40d56a36de2dab68988bab::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit988bd479db40d56a36de2dab68988bab::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit988bd479db40d56a36de2dab68988bab::$classMap;
 
         }, null, ClassLoader::class);
     }

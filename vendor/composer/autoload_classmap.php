@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AlgoliaSearch\\AlgoliaConnectionException' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaConnectionException.php',
     'AlgoliaSearch\\AlgoliaException' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaException.php',
+    'AlgoliaSearch\\Analytics' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Analytics.php',
     'AlgoliaSearch\\Client' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Client.php',
     'AlgoliaSearch\\ClientContext' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/ClientContext.php',
     'AlgoliaSearch\\FailingHostsCache' => $vendorDir . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/FailingHostsCache.php',
@@ -268,6 +269,7 @@ return array(
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
     'Psr\\Log\\Test\\DummyTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
     'Psr\\Log\\Test\\LoggerInterfaceTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+    'Psr\\Log\\Test\\TestLogger' => $vendorDir . '/psr/log/Psr/Log/Test/TestLogger.php',
     'React\\Promise\\CancellablePromiseInterface' => $vendorDir . '/react/promise/src/CancellablePromiseInterface.php',
     'React\\Promise\\CancellationQueue' => $vendorDir . '/react/promise/src/CancellationQueue.php',
     'React\\Promise\\Deferred' => $vendorDir . '/react/promise/src/Deferred.php',
@@ -307,6 +309,7 @@ return array(
     'TeamTNT\\TNTSearch\\Support\\Collection' => $vendorDir . '/teamtnt/tntsearch/src/Support/Collection.php',
     'TeamTNT\\TNTSearch\\Support\\Expression' => $vendorDir . '/teamtnt/tntsearch/src/Support/Expression.php',
     'TeamTNT\\TNTSearch\\Support\\Highlighter' => $vendorDir . '/teamtnt/tntsearch/src/Support/Highlighter.php',
+    'TeamTNT\\TNTSearch\\Support\\ProductTokenizer' => $vendorDir . '/teamtnt/tntsearch/src/Support/ProductTokenizer.php',
     'TeamTNT\\TNTSearch\\Support\\Tokenizer' => $vendorDir . '/teamtnt/tntsearch/src/Support/Tokenizer.php',
     'TeamTNT\\TNTSearch\\Support\\TokenizerInterface' => $vendorDir . '/teamtnt/tntsearch/src/Support/TokenizerInterface.php',
     'TeamTNT\\TNTSearch\\TNTFuzzyMatch' => $vendorDir . '/teamtnt/tntsearch/src/TNTFuzzyMatch.php',

@@ -52,6 +52,8 @@ class TNTIndexer
     public function setTokenizer(TokenizerInterface $tokenizer)
     {
         $this->tokenizer = $tokenizer;
+        $class           = get_class($tokenizer);
+        $this->index->exec("INSERT INTO info ( 'key', 'value') values ( 'tokenizer', '$class')");
     }
 
     public function setStopWords(array $stopWords)
@@ -66,8 +68,13 @@ class TNTIndexer
     {
         $this->config            = $config;
         $this->config['storage'] = rtrim($this->config['storage'], '/').'/';
+
         if (!isset($this->config['driver'])) {
             $this->config['driver'] = "";
+        }
+
+        if (isset($this->config['tokenizer'])) {
+            $this->tokenizer = new $this->config['tokenizer'];
         }
 
     }
@@ -315,7 +322,16 @@ class TNTIndexer
 
         foreach ($objects as $name => $object) {
             $name = str_replace($path.'/', '', $name);
-            if (stringEndsWith($name, $this->config['extension']) && !in_array($name, $exclude)) {
+
+            if (is_callable($this->config['extension'])) {
+                $includeFile = $this->config['extension']($object);
+            } elseif (is_array($this->config['extension'])) {
+                $includeFile = in_array($object->getExtension(), $this->config['extension']);
+            } else {
+                $includeFile = stringEndsWith($name, $this->config['extension']);
+            }
+
+            if ($includeFile && !in_array($name, $exclude)) {
                 $counter++;
                 $file = [
                     'id'      => $counter,
