@@ -15,6 +15,8 @@ class Admin extends \Cockpit\AuthController {
 
     public function reindex() {
 
+        \session_write_close();
+
         $storage = $this->module('detektivo')->storage();
         $collection = $this->param('collection');
 

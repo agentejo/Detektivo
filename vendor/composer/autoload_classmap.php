@@ -295,6 +295,7 @@ return array(
     'TeamTNT\\TNTSearch\\FileReaders\\TextFileReader' => $vendorDir . '/teamtnt/tntsearch/src/FileReaders/TextFileReader.php',
     'TeamTNT\\TNTSearch\\Indexer\\TNTGeoIndexer' => $vendorDir . '/teamtnt/tntsearch/src/Indexer/TNTGeoIndexer.php',
     'TeamTNT\\TNTSearch\\Indexer\\TNTIndexer' => $vendorDir . '/teamtnt/tntsearch/src/Indexer/TNTIndexer.php',
+    'TeamTNT\\TNTSearch\\KeywordExtraction\\Rake' => $vendorDir . '/teamtnt/tntsearch/src/KeywordExtraction/Rake.php',
     'TeamTNT\\TNTSearch\\Spell\\JaroWinklerDistance' => $vendorDir . '/teamtnt/tntsearch/src/Spell/JaroWinklerDistance.php',
     'TeamTNT\\TNTSearch\\Stemmer\\ArabicStemmer' => $vendorDir . '/teamtnt/tntsearch/src/Stemmer/ArabicStemmer.php',
     'TeamTNT\\TNTSearch\\Stemmer\\CroatianStemmer' => $vendorDir . '/teamtnt/tntsearch/src/Stemmer/CroatianStemmer.php',

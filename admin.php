@@ -3,7 +3,7 @@
 
 $app->on('admin.init', function() {
 
-    $this->on('cockpit.menu.aside', function() {
+    $this->on(['cockpit.menu', 'cockpit.menu.aside'], function() {
         $this->renderView("detektivo:views/partials/menu.php");
     });
 

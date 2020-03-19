@@ -362,6 +362,7 @@ class ComposerStaticInit988bd479db40d56a36de2dab68988bab
         'TeamTNT\\TNTSearch\\FileReaders\\TextFileReader' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/FileReaders/TextFileReader.php',
         'TeamTNT\\TNTSearch\\Indexer\\TNTGeoIndexer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Indexer/TNTGeoIndexer.php',
         'TeamTNT\\TNTSearch\\Indexer\\TNTIndexer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Indexer/TNTIndexer.php',
+        'TeamTNT\\TNTSearch\\KeywordExtraction\\Rake' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/KeywordExtraction/Rake.php',
         'TeamTNT\\TNTSearch\\Spell\\JaroWinklerDistance' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Spell/JaroWinklerDistance.php',
         'TeamTNT\\TNTSearch\\Stemmer\\ArabicStemmer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Stemmer/ArabicStemmer.php',
         'TeamTNT\\TNTSearch\\Stemmer\\CroatianStemmer' => __DIR__ . '/..' . '/teamtnt/tntsearch/src/Stemmer/CroatianStemmer.php',
